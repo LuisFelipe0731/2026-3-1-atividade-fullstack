@@ -32,15 +32,19 @@ O GitHub Copilot foi utilizado como agente de pair programming para estruturar a
 
 ### Execução do projeto
 
-Requisitos: Node.js 20 ou superior.
+Requisitos: Node.js 20 ou superior e PostgreSQL 14 ou superior.
 
 ```bash
+npm install
+export DATABASE_URL="postgresql://usuario:senha@localhost:5432/diatinf_x"
 npm start
 ```
 
-Acesse <http://localhost:3000>. A mesma aplicação serve a interface e os endpoints REST. Os principais endpoints são `GET /api/posts`, `POST /api/posts`, `POST /api/posts/:id/comments`, `POST /api/posts/:id/ratings` e `POST /api/auth/login`.
+Acesse <http://localhost:3000>. A API executa automaticamente o schema em [api/schema.sql](api/schema.sql) e cria dados iniciais quando o banco está vazio. O modelo usa PostgreSQL para usuários, posts, comentários e avaliações; não há SQLite nem armazenamento de posts em memória. Consulte [.env.example](.env.example) para o formato da conexão.
 
-Para testar o login de demonstração, use o usuário `pedrolima` e qualquer senha não vazia. A integração SUAP deve substituir esse fluxo em ambiente de produção, conforme a documentação oficial indicada em [atividade.md](atividade.md).
+A mesma aplicação serve a interface e os endpoints REST. O feed (`GET /api/posts`) é público. Publicação, comentários e avaliações exigem `Authorization: Bearer <token>` obtido em `POST /api/auth/login`.
+
+Para testar o login de demonstração, use o usuário `pedrolima` e a senha `demo`. A integração SUAP deve substituir esse fluxo em ambiente de produção, conforme a documentação oficial indicada em [atividade.md](atividade.md).
 
 **Vídeo:** adicione aqui o link do vídeo publicado no GitHub.
 

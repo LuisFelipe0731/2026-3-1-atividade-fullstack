@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS users (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  handle TEXT UNIQUE NOT NULL,
+  initials TEXT NOT NULL,
+  color TEXT NOT NULL,
+  password_hash TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL REFERENCES users(id),
+  content TEXT NOT NULL CHECK (char_length(content) BETWEEN 1 AND 280),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS ratings (
+  id BIGSERIAL PRIMARY KEY,
+  post_id TEXT NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  score INTEGER NOT NULL CHECK (score BETWEEN 1 AND 3),
+  UNIQUE (post_id, user_id)
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+  id TEXT PRIMARY KEY,
+  post_id TEXT NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  parent_id TEXT REFERENCES comments(id) ON DELETE CASCADE,
+  content TEXT NOT NULL CHECK (char_length(content) BETWEEN 1 AND 280),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
