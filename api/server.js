@@ -61,6 +61,14 @@ const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && url.pathname === '/api/health') return json(response, 200, { status: 'ok', service: 'diatinf-x-api', database: 'postgresql' });
     if (request.method === 'GET' && url.pathname === '/api/posts') return json(response, 200, await getPosts(url.searchParams.get('q') || ''));
+    const profile = url.pathname.match(/^\/api\/users\/([^/]+)$/);
+    if (request.method === 'GET' && profile) {
+      const userResult = await pool.query('SELECT id, name, handle, initials, color FROM users WHERE handle = $1', [profile[1]]);
+      if (!userResult.rows[0]) return json(response, 404, { error: 'Perfil não encontrado.' });
+      const user = userResult.rows[0];
+      const userPosts = (await getPosts()).filter((post) => post.user.handle === user.handle);
+      return json(response, 200, { user, posts: userPosts });
+    }
     if (request.method === 'POST' && url.pathname === '/api/auth/login') {
       const data = await readBody(request); const result = await pool.query('SELECT id, name, handle, initials, color FROM users WHERE handle = $1 AND password_hash = $2', [data.username, hashPassword(data.password || '')]);
       if (!result.rows[0]) return json(response, 401, { error: 'Usuário ou senha inválidos.' });
