@@ -47,6 +47,6 @@ A mesma aplicação serve a interface e os endpoints REST. O feed (`GET /api/pos
 
 Para testar o login de demonstração, use o usuário `pedrolima` e a senha `demo`. A integração SUAP deve substituir esse fluxo em ambiente de produção, conforme a documentação oficial indicada em [atividade.md](atividade.md).
 
-**Vídeo:** adicione aqui o link do vídeo publicado no GitHub.
+**Vídeo:** https://drive.google.com/file/d/1Ajsl2EfPwL5W9azQUVgLtbnp9xCk8x7X/view?usp=sharing
 
 ---
