@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DIATINF X, uma comunidade para compartilhar ideias e conhecimento.">
+    <title>DIATINF X</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#feed" aria-label="DIATINF X, início"><span>DIATINF</span> X</a>
+        <div class="top-actions">
+          <button class="icon-button" id="search-toggle" aria-label="Pesquisar publicações" title="Pesquisar">⌕</button>
+          <button class="icon-button accent" id="compose-top" aria-label="Nova publicação" title="Nova publicação">+</button>
+          <button class="menu-button" id="login-open">Entrar</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="side-nav" aria-label="Navegação principal">
+          <div class="profile-mini"><span class="avatar avatar-orange">LF</span><div><strong>Luís Felipe</strong><small>@luisfelipe</small></div></div>
+          <nav>
+            <a class="nav-link active" href="#feed" data-view="feed"><span>⌂</span> Início</a>
+            <a class="nav-link" href="#global" data-view="global"><span>◎</span> Feed global</a>
+            <a class="nav-link" href="#mine" data-view="mine"><span>▤</span> Meus posts</a>
+            <a class="nav-link" href="#profile" data-view="profile"><span>◯</span> Meu perfil</a>
+          </nav>
+          <button class="compose-button" id="compose-side">＋ Nova publicação</button>
+        </aside>
+
+        <section class="feed-column" id="feed-column">
+          <div class="mobile-heading"><div><p class="eyebrow">COMUNIDADE INFOWEB</p><h1 id="view-title">Feed global</h1></div><span class="live-dot">ao vivo</span></div>
+          <form class="search-bar hidden" id="search-form"><span>⌕</span><input id="search-input" type="search" placeholder="Buscar publicações ou pessoas..."><button type="button" id="search-close" aria-label="Fechar pesquisa">×</button></form>
+          <section class="composer" id="composer">
+            <div class="composer-top"><span class="avatar avatar-orange">LF</span><textarea id="post-content" maxlength="280" placeholder="O que está acontecendo na DIATINF?" aria-label="Texto da publicação"></textarea></div>
+            <div class="composer-bottom"><span id="char-count">0 / 280</span><button class="primary-button" id="publish-button" type="button">Publicar</button></div>
+          </section>
+          <div class="feed-status" id="feed-status" role="status"></div>
+          <div id="posts" class="posts"></div>
+        </section>
+
+        <aside class="insights">
+          <section class="insight-panel"><p class="eyebrow">SOBRE A COMUNIDADE</p><h2>Ideias que circulam, pessoas que crescem.</h2><p>Um espaço para a comunidade DIATINF conversar, compartilhar e construir junto.</p><a href="https://diatinf.ifrn.edu.br/" target="_blank" rel="noreferrer">Conheça a DIATINF ↗</a></section>
+          <section class="insight-panel trends"><p class="eyebrow">EM ALTA</p><h2>#programação</h2><h2>#infoweb</h2><h2>#criatividade</h2></section>
+        </aside>
+      </main>
+
+      <nav class="bottom-nav" aria-label="Navegação mobile"><a class="active" href="#feed" data-view="feed"><span>⌂</span>Início</a><a href="#global" data-view="global"><span>◎</span>Global</a><button id="compose-bottom" aria-label="Nova publicação">+</button><a href="#mine" data-view="mine"><span>▤</span>Posts</a><a href="#profile" data-view="profile"><span>◯</span>Perfil</a></nav>
+    </div>
+
+    <dialog id="login-dialog"><form method="dialog" id="login-form"><button class="dialog-close" value="cancel" aria-label="Fechar">×</button><p class="eyebrow">ACESSO DA COMUNIDADE</p><h2>Entrar no DIATINF X</h2><label>Usuário<input name="username" autocomplete="username" placeholder="ex.: pedrolima" required></label><label>Senha<input name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required></label><button class="primary-button" type="submit">Entrar</button><p id="login-message" class="form-message"></p></form></dialog>
+    <script src="/app.js"></script>
+  </body>
+</html>
