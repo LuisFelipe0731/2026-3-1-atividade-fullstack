@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: diatinf-x-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: diatinf
+      POSTGRES_PASSWORD: diatinf
+      POSTGRES_DB: diatinf_x
+    ports:
+      - "5432:5432"
+    volumes:
+      - diatinf-x-data:/var/lib/postgresql/data
+
+volumes:
+  diatinf-x-data:

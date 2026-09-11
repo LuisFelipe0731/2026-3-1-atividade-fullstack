@@ -5,6 +5,9 @@
   "description": "Replica simplificada do X para a atividade de POS",
   "scripts": {
     "start": "node api/server.js",
+    "start:local": "DATABASE_URL=postgresql://diatinf:diatinf@localhost:5432/diatinf_x node api/server.js",
+    "db:start": "docker compose up -d db",
+    "db:stop": "docker compose down",
     "dev": "node --watch api/server.js"
   },
   "dependencies": {

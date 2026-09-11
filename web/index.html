@@ -37,6 +37,7 @@
             <div class="composer-top"><span class="avatar avatar-orange">LF</span><textarea id="post-content" maxlength="280" placeholder="O que está acontecendo na DIATINF?" aria-label="Texto da publicação"></textarea></div>
             <div class="composer-bottom"><span id="char-count">0 / 280</span><button class="primary-button" id="publish-button" type="button">Publicar</button></div>
           </section>
+          <section class="profile-panel hidden" id="profile-panel"></section>
           <div class="feed-status" id="feed-status" role="status"></div>
           <div id="posts" class="posts"></div>
         </section>
@@ -51,6 +52,7 @@
     </div>
 
     <dialog id="login-dialog"><form method="dialog" id="login-form"><button class="dialog-close" value="cancel" aria-label="Fechar">×</button><p class="eyebrow">ACESSO DA COMUNIDADE</p><h2>Entrar no DIATINF X</h2><label>Usuário<input name="username" autocomplete="username" placeholder="ex.: pedrolima" required></label><label>Senha<input name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required></label><button class="primary-button" type="submit">Entrar</button><p id="login-message" class="form-message"></p></form></dialog>
+    <dialog id="rating-dialog"><form method="dialog" id="rating-form"><button class="dialog-close" value="cancel" aria-label="Fechar">×</button><p class="eyebrow">AVALIE UMA PUBLICAÇÃO</p><h2>Como foi essa ideia?</h2><p class="rating-hint">Escolha de 1 a 3 estrelas para registrar sua avaliação.</p><div class="rating-options" role="group" aria-label="Nota da publicação"><button type="button" class="rating-option" data-score="1" aria-label="1 estrela">★<small>1</small></button><button type="button" class="rating-option" data-score="2" aria-label="2 estrelas">★<small>2</small></button><button type="button" class="rating-option" data-score="3" aria-label="3 estrelas">★<small>3</small></button></div><button type="button" class="secondary-button" id="rating-cancel">Agora não</button><p id="rating-message" class="form-message"></p></form></dialog>
     <script src="/app.js"></script>
   </body>
 </html>

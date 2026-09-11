@@ -36,11 +36,13 @@ Requisitos: Node.js 20 ou superior e PostgreSQL 14 ou superior.
 
 ```bash
 npm install
-export DATABASE_URL="postgresql://usuario:senha@localhost:5432/diatinf_x"
-npm start
+npm run db:start
+npm run start:local
 ```
 
 Acesse <http://localhost:3000>. A API executa automaticamente o schema em [api/schema.sql](api/schema.sql) e cria dados iniciais quando o banco está vazio. O modelo usa PostgreSQL para usuários, posts, comentários e avaliações; não há SQLite nem armazenamento de posts em memória. Consulte [.env.example](.env.example) para o formato da conexão.
+
+Para parar o banco depois do uso, execute `npm run db:stop`. Em outro ambiente, defina `DATABASE_URL` e use `npm start`.
 
 A mesma aplicação serve a interface e os endpoints REST. O feed (`GET /api/posts`) é público. Publicação, comentários e avaliações exigem `Authorization: Bearer <token>` obtido em `POST /api/auth/login`.
 
