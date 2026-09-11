@@ -13,6 +13,24 @@ const api = async (path, options = {}) => {
 
 function initials(user) { return user?.initials || '??'; }
 function avatar(user) { return `<span class="avatar ${user?.color === '#ce701b' ? 'avatar-orange' : user?.color === '#327f8f' ? 'avatar-teal' : user?.color === '#d45d4c' ? 'avatar-red' : 'avatar-blue'}">${initials(user)}</span>`; }
+function syncCurrentUser() {
+  const card = document.querySelector('#current-user-card');
+  const composerAvatar = document.querySelector('#composer-avatar');
+  const loginButton = document.querySelector('#login-open');
+  if (state.user) {
+    card.innerHTML = `${avatar(state.user)}<div><strong>${state.user.name}</strong><small>@${state.user.handle}</small></div>`;
+    composerAvatar.className = `avatar ${state.user.color === '#ce701b' ? 'avatar-orange' : state.user.color === '#327f8f' ? 'avatar-teal' : state.user.color === '#d45d4c' ? 'avatar-red' : 'avatar-blue'}`;
+    composerAvatar.textContent = state.user.initials;
+    loginButton.textContent = state.user.name.split(' ')[0];
+    document.querySelector('#post-content').placeholder = 'O que está acontecendo na DIATINF?';
+  } else {
+    card.innerHTML = '<span class="avatar avatar-blue">?</span><div><strong>Visitante</strong><small>Faça login para publicar</small></div>';
+    composerAvatar.className = 'avatar avatar-blue';
+    composerAvatar.textContent = '?';
+    loginButton.textContent = 'Entrar';
+    document.querySelector('#post-content').placeholder = 'Entre para publicar na DIATINF';
+  }
+}
 function relativeTime(date) { const minutes = Math.max(1, Math.round((Date.now() - new Date(date).getTime()) / 60000)); return minutes < 60 ? `${minutes} min` : `${Math.round(minutes / 60)} h`; }
 function postTemplate(post, index) {
   const comments = post.comments.map((comment) => `<div class="comment">${avatar(comment.user)}<p><strong>${comment.user.name}</strong> ${comment.content}</p></div>`).join('');
@@ -49,8 +67,8 @@ document.querySelectorAll('.rating-option').forEach((button) => button.addEventL
 document.querySelector('#rating-cancel').addEventListener('click', () => document.querySelector('#rating-dialog').close());
 postsElement.addEventListener('submit', async (event) => { if (!event.target.matches('.comment-form')) return; event.preventDefault(); if (!requireLogin()) return; const input = event.target.querySelector('input'); if (!input.value.trim()) return; try { await api(`/posts/${event.target.dataset.id}/comments`, { method: 'POST', body: JSON.stringify({ content: input.value }) }); await loadPosts(); } catch (error) { statusElement.textContent = error.message; } });
 document.querySelector('#login-open').addEventListener('click', () => document.querySelector('#login-dialog').showModal());
-document.querySelector('#login-form').addEventListener('submit', async (event) => { event.preventDefault(); const form = new FormData(event.target); const message = document.querySelector('#login-message'); try { const result = await api('/auth/login', { method: 'POST', body: JSON.stringify({ username: form.get('username'), password: form.get('password') }) }); state.token = result.token; state.user = result.user; localStorage.setItem('diatinf-token', result.token); localStorage.setItem('diatinf-user', JSON.stringify(result.user)); document.querySelector('#login-open').textContent = result.user.name.split(' ')[0]; message.textContent = `Olá, ${result.user.name.split(' ')[0]}!`; setTimeout(() => document.querySelector('#login-dialog').close(), 700); } catch (error) { message.textContent = error.message; } });
-if (state.user) document.querySelector('#login-open').textContent = state.user.name.split(' ')[0];
+document.querySelector('#login-form').addEventListener('submit', async (event) => { event.preventDefault(); const form = new FormData(event.target); const message = document.querySelector('#login-message'); try { const result = await api('/auth/login', { method: 'POST', body: JSON.stringify({ username: form.get('username'), password: form.get('password') }) }); state.token = result.token; state.user = result.user; localStorage.setItem('diatinf-token', result.token); localStorage.setItem('diatinf-user', JSON.stringify(result.user)); syncCurrentUser(); message.textContent = `Olá, ${result.user.name.split(' ')[0]}!`; setTimeout(() => document.querySelector('#login-dialog').close(), 700); } catch (error) { message.textContent = error.message; } });
+syncCurrentUser();
 const [initialView, initialHandle] = window.location.hash.slice(1).split('/');
 setView(initialView || 'feed', initialHandle || '');
 loadPosts();

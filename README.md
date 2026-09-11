@@ -13,7 +13,6 @@
 ## Relato da atividade
 **Aluno:** Luís Felipe  
 **GitHub:** [LuisFelipe0731](https://github.com/LuisFelipe0731)  
-**LinkedIn:** adicione aqui o link do seu perfil
 
 ### Componentes e tecnologias
 

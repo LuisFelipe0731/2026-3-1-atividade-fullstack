@@ -20,7 +20,7 @@
 
       <main class="layout">
         <aside class="side-nav" aria-label="Navegação principal">
-          <div class="profile-mini"><span class="avatar avatar-orange">LF</span><div><strong>Luís Felipe</strong><small>@luisfelipe</small></div></div>
+          <div class="profile-mini" id="current-user-card"><span class="avatar avatar-blue">?</span><div><strong>Visitante</strong><small>Faça login para publicar</small></div></div>
           <nav>
             <a class="nav-link active" href="#feed" data-view="feed"><span>⌂</span> Início</a>
             <a class="nav-link" href="#mine" data-view="mine"><span>▤</span> Meus posts</a>
@@ -33,7 +33,7 @@
           <div class="mobile-heading"><div><p class="eyebrow">COMUNIDADE INFOWEB</p><h1 id="view-title">Feed global</h1></div><span class="live-dot">ao vivo</span></div>
           <form class="search-bar hidden" id="search-form"><span>⌕</span><input id="search-input" type="search" placeholder="Buscar publicações ou pessoas..."><button type="button" id="search-close" aria-label="Fechar pesquisa">×</button></form>
           <section class="composer" id="composer">
-            <div class="composer-top"><span class="avatar avatar-orange">LF</span><textarea id="post-content" maxlength="280" placeholder="O que está acontecendo na DIATINF?" aria-label="Texto da publicação"></textarea></div>
+            <div class="composer-top"><span class="avatar avatar-blue" id="composer-avatar">?</span><textarea id="post-content" maxlength="280" placeholder="Entre para publicar na DIATINF" aria-label="Texto da publicação"></textarea></div>
             <div class="composer-bottom"><span id="char-count">0 / 280</span><button class="primary-button" id="publish-button" type="button">Publicar</button></div>
           </section>
           <section class="profile-panel hidden" id="profile-panel"></section>
